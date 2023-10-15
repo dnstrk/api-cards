@@ -2,8 +2,8 @@ import React from "react";
 import cl from "./index.module.css";
 import { Container } from "@mui/material";
 
-export default function CardUser({ user, dispatch }) {
-    function home() {
+export default function CardUser({ user, dispatch}) {
+    function back() {
         dispatch({ type: "SHOW_LIST" });
     }
 
@@ -42,8 +42,8 @@ export default function CardUser({ user, dispatch }) {
                         </div>
                     </div>
                 </div>
-                <button onClick={home} className={cl.homeBtn}>
-                    To All users
+                <button onClick={back} className={cl.homeBtn}>
+                    Back
                 </button>
             </div>
         </Container>

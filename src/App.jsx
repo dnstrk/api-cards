@@ -14,6 +14,7 @@ const InitialState = {
     card: [],
     cardVisible: false,
     filterValue: "",
+    filteredUsers: [],
 };
 
 function reducer(state, action) {
@@ -49,6 +50,18 @@ function reducer(state, action) {
                 ...state,
                 filterValue: action.setFilter,
             };
+        case "FILTERED_LIST":
+            return {
+                ...state,
+                filteredUsers: action.payload,
+            };
+        case "RESET_FILTER":
+            return {
+                ...state,
+                filterValue: "",
+            };
+        default:
+            return { ...state };
     }
 }
 
@@ -68,15 +81,33 @@ function App() {
 
     useEffect(() => {
         fetchUsers(dispatch);
-    });
+    }, []);
+
+    // useEffect(() => {
+    //     dispatch({ type: "FILTERED_LIST", payload: filteredUsers });
+    // }, [state.filterValue]);
+    useEffect(() => {
+        dispatch({ type: "FILTERED_LIST", payload: filteredUsers });
+    }, [state.filterValue]);
+    
 
     function home() {
         dispatch({ type: "SHOW_LIST" });
+        dispatch({ type: "RESET_FILTER" });
     }
 
-    // function test() {
-    //     console.log(state.filterValue);
-    // }
+
+    //FILTER BLOCK
+    function filter(users, query) {
+        const filteredList = users.filter((user) => {
+            return user.name.toLowerCase().includes(query);
+        });
+        return filteredList;
+    }
+    const filteredUsers = filter(state.users, state.filterValue);
+    state.filteredUsers = filteredUsers
+
+    
 
     return (
         <div>
@@ -100,12 +131,13 @@ function App() {
                         flexDirection: "row",
                         gap: "20px",
                     }}
-                ></div>
+                >
+                </div>
                 {state.error ? (
                     <Alert severity="error">{state.errorMsg}</Alert>
                 ) : null}
                 {state.usersVisible ? (
-                    <ListUser users={state.users} dispatch={dispatch} />
+                    <ListUser users={state.filteredUsers} dispatch={dispatch} />
                 ) : null}
                 {state.cardVisible ? (
                     <CardUser user={state.card} dispatch={dispatch} />
