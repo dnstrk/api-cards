@@ -1,0 +1,14 @@
+.box {
+    display: flex;
+    align-items: center;
+    width: "100%";
+    background: linear-gradient(
+        90deg,
+        rgba(189, 58, 58, 1) 0%,
+        rgba(92, 115, 176, 0.9948354341736695) 48%,
+        rgba(189, 58, 58, 1) 100%
+    );
+    box-shadow: 2px 2px 20px #000;
+    height: 50px;
+}
+

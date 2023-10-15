@@ -1,0 +1,46 @@
+.cardWrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;    
+}
+
+.cardBorder {
+    width: 40%;
+    padding: 10px;
+    border: 2px antiquewhite solid;
+    border-radius: 20px;
+}
+
+.title {
+    color: antiquewhite;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.info {
+    color: #ffffff;
+    font-size: 20px;
+    margin: 10px 0;
+}
+
+.homeBtn {
+    padding: 5px 10px;
+    border: 1px #fff solid;
+    border-radius: 10px;
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    align-self: end;
+    color: #ebebebc5;
+
+    transition: 0.2s;
+}
+
+.homeBtn:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 2px 2px 10px #000;
+}
+
+.homeBtn:active {
+    transform: translate(0px, 0px);
+}

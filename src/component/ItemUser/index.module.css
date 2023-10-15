@@ -1,0 +1,26 @@
+.item {
+    width: 100%;
+    padding: 4px 10px;
+    border: 1px #e2e2e2 solid;
+    border-radius: 10px;
+    color: #ffffffe1;
+    /* background: linear-gradient(90deg, rgba(176,128,92,0.9948354341736695) 3%, rgba(190,80,80,1) 10%, rgba(190,80,80,1) 90%, rgba(176,128,92,1) 97%); */
+
+    font-size: 20px;
+    font-weight: bold;
+
+    transition: 0.3s;
+}
+
+.item:hover {
+    color: #ffffff;
+    transform: translate(-2px, -2px);
+    box-shadow: 2px 2px 10px #000;
+}
+.item:active {
+    transform: translate(0px, 0px);
+}
+
+.button {
+    width: 100%;
+}

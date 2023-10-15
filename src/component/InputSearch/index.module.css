@@ -1,0 +1,7 @@
+div.input::after {
+    all: unset;
+}
+
+.input input {
+    color: #fff;
+}
