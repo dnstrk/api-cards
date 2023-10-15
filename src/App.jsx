@@ -13,6 +13,7 @@ const InitialState = {
     errorMsg: null,
     card: [],
     cardVisible: false,
+    filterValue: "",
 };
 
 function reducer(state, action) {
@@ -32,10 +33,9 @@ function reducer(state, action) {
             };
         case "SHOW_LIST":
             return {
-              ...state,
-              cardVisible: false,
-              usersVisible: true,
-
+                ...state,
+                cardVisible: false,
+                usersVisible: true,
             };
         case "SHOW_CARD":
             return {
@@ -43,6 +43,11 @@ function reducer(state, action) {
                 card: action.payload,
                 cardVisible: true,
                 usersVisible: false,
+            };
+        case "SET_FILTER":
+            return {
+                ...state,
+                filterValue: action.setFilter,
             };
     }
 }
@@ -65,14 +70,22 @@ function App() {
         fetchUsers(dispatch);
     });
 
- 
     function home() {
         dispatch({ type: "SHOW_LIST" });
     }
 
+    // function test() {
+    //     console.log(state.filterValue);
+    // }
+
     return (
         <div>
-            <Header home={home}/>
+            <Header
+                dispatch={dispatch}
+                filterValue={state.filterValue}
+                users={state.users}
+                home={home}
+            />
             <div
                 style={{
                     display: "flex",
@@ -87,14 +100,16 @@ function App() {
                         flexDirection: "row",
                         gap: "20px",
                     }}
-                >
-                    {/* <button onClick={card}>card</button> */}
-                </div>
+                ></div>
                 {state.error ? (
                     <Alert severity="error">{state.errorMsg}</Alert>
                 ) : null}
-                {state.usersVisible ? <ListUser users={state.users} dispatch={dispatch} /> : null}
-                {state.cardVisible ? <CardUser user={state.card} dispatch={dispatch}/> : null}
+                {state.usersVisible ? (
+                    <ListUser users={state.users} dispatch={dispatch} />
+                ) : null}
+                {state.cardVisible ? (
+                    <CardUser user={state.card} dispatch={dispatch} />
+                ) : null}
             </div>
         </div>
     );
