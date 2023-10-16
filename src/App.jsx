@@ -86,9 +86,7 @@ function App() {
     // useEffect(() => {
     //     dispatch({ type: "FILTERED_LIST", payload: filteredUsers });
     // }, [state.filterValue]);
-    useEffect(() => {
-        dispatch({ type: "FILTERED_LIST", payload: filteredUsers });
-    }, [state.filterValue]);
+    
     
 
     function home() {
@@ -100,14 +98,19 @@ function App() {
     //FILTER BLOCK
     function filter(users, query) {
         const filteredList = users.filter((user) => {
-            return user.name.toLowerCase().includes(query);
+            return user.name.toLowerCase().includes(query.toLowerCase());
         });
         return filteredList;
     }
     const filteredUsers = filter(state.users, state.filterValue);
-    state.filteredUsers = filteredUsers
+    // state.filteredUsers = filteredUsers
 
-    
+
+    useEffect(() => {
+      dispatch({ type: "FILTERED_LIST", payload: filteredUsers });
+  }, [state.filterValue]);
+
+
 
     return (
         <div>
@@ -137,7 +140,7 @@ function App() {
                     <Alert severity="error">{state.errorMsg}</Alert>
                 ) : null}
                 {state.usersVisible ? (
-                    <ListUser users={state.filteredUsers} dispatch={dispatch} />
+                    <ListUser users={state.filteredUsers == 0 ? filteredUsers : state.filteredUsers} dispatch={dispatch} />
                 ) : null}
                 {state.cardVisible ? (
                     <CardUser user={state.card} dispatch={dispatch} />
