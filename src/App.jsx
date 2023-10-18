@@ -53,7 +53,19 @@ function reducer(state, action) {
         case "FILTERED_LIST":
             return {
                 ...state,
-                filteredUsers: action.payload,
+                filteredUsers: state.users.filter((user) => {
+                    return (
+                        user.name
+                            .toLowerCase()
+                            .includes(state.filterValue.toLowerCase()) ||
+                        user.username
+                            .toLowerCase()
+                            .includes(state.filterValue.toLowerCase()) ||
+                        user.email
+                            .toLowerCase()
+                            .includes(state.filterValue.toLowerCase())
+                    );
+                }),
             };
         case "RESET_FILTER":
             return {
@@ -86,31 +98,25 @@ function App() {
     // useEffect(() => {
     //     dispatch({ type: "FILTERED_LIST", payload: filteredUsers });
     // }, [state.filterValue]);
-    
-    
 
     function home() {
         dispatch({ type: "SHOW_LIST" });
         dispatch({ type: "RESET_FILTER" });
     }
 
-
     //FILTER BLOCK
-    function filter(users, query) {
-        const filteredList = users.filter((user) => {
-            return user.name.toLowerCase().includes(query.toLowerCase());
-        });
-        return filteredList;
-    }
-    const filteredUsers = filter(state.users, state.filterValue);
+    // function filter(users, query) {
+    //     const filteredList = users.filter((user) => {
+    //         return user.name.toLowerCase().includes(query.toLowerCase());
+    //     });
+    //     return filteredList;
+    // }
+    // const filteredUsers = filter(state.users, state.filterValue);
     // state.filteredUsers = filteredUsers
 
-
     useEffect(() => {
-      dispatch({ type: "FILTERED_LIST", payload: filteredUsers });
-  }, [state.filterValue]);
-
-
+        dispatch({ type: "FILTERED_LIST" });
+    }, [state.filterValue, state.users]);
 
     return (
         <div>
@@ -134,13 +140,12 @@ function App() {
                         flexDirection: "row",
                         gap: "20px",
                     }}
-                >
-                </div>
+                ></div>
                 {state.error ? (
                     <Alert severity="error">{state.errorMsg}</Alert>
                 ) : null}
                 {state.usersVisible ? (
-                    <ListUser users={state.filteredUsers == 0 ? filteredUsers : state.filteredUsers} dispatch={dispatch} />
+                    <ListUser users={state.filteredUsers} dispatch={dispatch} />
                 ) : null}
                 {state.cardVisible ? (
                     <CardUser user={state.card} dispatch={dispatch} />
