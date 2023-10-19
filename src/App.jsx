@@ -72,6 +72,19 @@ function reducer(state, action) {
                 ...state,
                 filterValue: "",
             };
+        case "CHANGED":
+            if (state.card.id === action.card.id) {
+                return { ...state, card: action.card };
+            } else {
+                return { ...state, card: state.card };
+            }
+        // state.card.map((c) => {
+        //     if (c.id === action.card.id) {
+        //         return action.user;
+        //     } else {
+        //         return c;
+        //     }
+        // });
         default:
             return { ...state };
     }
@@ -95,28 +108,14 @@ function App() {
         fetchUsers(dispatch);
     }, []);
 
-    // useEffect(() => {
-    //     dispatch({ type: "FILTERED_LIST", payload: filteredUsers });
-    // }, [state.filterValue]);
+    useEffect(() => {
+        dispatch({ type: "FILTERED_LIST" });
+    }, [state.filterValue, state.users]);
 
     function home() {
         dispatch({ type: "SHOW_LIST" });
         dispatch({ type: "RESET_FILTER" });
     }
-
-    //FILTER BLOCK
-    // function filter(users, query) {
-    //     const filteredList = users.filter((user) => {
-    //         return user.name.toLowerCase().includes(query.toLowerCase());
-    //     });
-    //     return filteredList;
-    // }
-    // const filteredUsers = filter(state.users, state.filterValue);
-    // state.filteredUsers = filteredUsers
-
-    useEffect(() => {
-        dispatch({ type: "FILTERED_LIST" });
-    }, [state.filterValue, state.users]);
 
     return (
         <div>
@@ -134,13 +133,6 @@ function App() {
                     marginTop: "50px",
                 }}
             >
-                <div
-                    style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        gap: "20px",
-                    }}
-                ></div>
                 {state.error ? (
                     <Alert severity="error">{state.errorMsg}</Alert>
                 ) : null}
@@ -148,7 +140,9 @@ function App() {
                     <ListUser users={state.filteredUsers} dispatch={dispatch} />
                 ) : null}
                 {state.cardVisible ? (
-                    <CardUser user={state.card} dispatch={dispatch} />
+                    <>
+                        <CardUser user={state.card} dispatch={dispatch} />
+                    </>
                 ) : null}
             </div>
         </div>

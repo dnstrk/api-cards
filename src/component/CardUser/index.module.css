@@ -19,7 +19,7 @@
 
 .info {
     position: relative;
-
+    width: 100%;
     color: #ffffff;
     font-size: 20px;
     margin: 10px 0;
@@ -73,80 +73,10 @@ button.btn:hover {
     border-color: #dbdbdb;
 }
 
-/* .email {
-    display: contents;
-    position: relative;
+.email, .phone, .site {
+    transition: .3s;
 }
 
-.email::before {
-    position: absolute;
-    display: block;
-    content: "";
-    width: 1px;
-    height: 0;
-    top: 0;
-    left: -2px;
-    background: #dbdbdb;
-
-    transition: 0.3s;
+.email:hover,.phone:hover, .site:hover {
+    color: #dbbb63;
 }
-
-.email::after {
-    position: absolute;
-    display: block;
-    content: "";
-    width: 1px;
-    height: 0;
-    top: 0;
-    left: 100%;
-    background: #dbdbdb;
-
-    transition: 0.3s;
-}
-
-.email:hover::before {
-    height: 50%;
-}
-
-.email:hover::after {
-    height: 50%;
-}
-
-.phone {
-    display: contents;
-    position: relative;
-}
-
-.phone::before {
-    position: absolute;
-    display: block;
-    content: "";
-    width: 1px;
-    height: 0;
-    top: 50%;
-    left: -2px;
-    background: #dbdbdb;
-
-    transition: 0.3s;
-}
-
-.phone::after {
-    position: absolute;
-    display: block;
-    content: "";
-    width: 1px;
-    height: 0;
-    top: 50%;
-    left: 100%;
-    background: #dbdbdb;
-
-    transition: 0.3s;
-}
-
-.phone:hover::before {
-    height: 50%;
-}
-
-.phone:hover::after {
-    height: 50%;
-} */

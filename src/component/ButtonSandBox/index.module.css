@@ -1,0 +1,12 @@
+button.btn {
+    color: #dbdbdb;
+    margin-top: 20px;
+    align-self: end;
+    color: #dbdbdb;
+    border-color: #dbdbdb;
+}
+
+button.btn:hover {
+    border-color: #8b8b8b;
+}
+/* 8b8b8b */

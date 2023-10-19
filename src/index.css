@@ -19,13 +19,11 @@ code {
         monospace;
 }
 
-button {
+button, ul, input {
     all: unset;
 }
 
-ul {
-    all: unset;
-}
+
 
 li {
     list-style-type: none
