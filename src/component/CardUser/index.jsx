@@ -6,7 +6,7 @@ import ButtonSandBox from "../ButtonSandBox";
 
 export default function CardUser({ user, dispatch }) {
     const [isEditing, setIsEditing] = useState(true);
-
+    console.log(user.id);
     function handleEdit() {
         setIsEditing(!isEditing);
     }
@@ -22,30 +22,107 @@ export default function CardUser({ user, dispatch }) {
     // const [test, setTest] = useState('123')
 
     return (
-        <Container maxWidth="md">
+        <Container maxWidth="lg">
             <div style={{ display: "flex", flexDirection: "column" }}>
                 <div className={cl.cardWrap}>
                     <div className={cl.cardBorder}>
                         <span className={cl.title}>User:</span>
-
-                        <input
-                            readOnly={isEditing}
-                            type="text"
-                            className={cl.info}
-                            value={user.name}
-                            onChange={(e) => {
-                                handleChangeUser({
-                                    ...user,
-                                    name: e.target.value,
-                                });
-                            }}
-                        ></input>
-
+                        <div className={cl.info}>
+                            <input
+                                readOnly={isEditing}
+                                type="text"
+                                className={cl.editInp}
+                                value={user.name}
+                                onChange={(e) => {
+                                    handleChangeUser({
+                                        ...user,
+                                        name: e.target.value,
+                                    });
+                                }}
+                            ></input>
+                        </div>
                         <hr />
                         <span className={cl.title}>Address:</span>
+
                         <div className={cl.info}>
-                            {user.address.city} : {user.address.street} :{" "}
-                            {user.address.suite}
+                            <div
+                                style={{
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    alignItems: "center",
+                                    gap: "10px",
+                                }}
+                            >
+                                City:
+                                <input
+                                    readOnly={isEditing}
+                                    type="text"
+                                    className={cl.editInp}
+                                    value={user.address.city}
+                                    onChange={(e) => {
+                                        handleChangeUser({
+                                            ...user,
+                                            address: {
+                                                city: e.target.value,
+                                                street: user.address.street,
+                                                suite: user.address.suite,
+                                            },
+                                        });
+                                    }}
+                                ></input>
+                            </div>
+                            <div
+                                style={{
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    alignItems: "center",
+                                    gap: "10px",
+                                }}
+                            >
+                                Street:
+                                <input
+                                    readOnly={isEditing}
+                                    type="text"
+                                    className={cl.editInp}
+                                    value={user.address.street}
+                                    onChange={(e) => {
+                                        handleChangeUser({
+                                            ...user,
+                                            address: {
+                                                city: user.address.city,
+                                                street: e.target.value,
+                                                suite: user.address.suite,
+                                            },
+                                        });
+                                    }}
+                                ></input>
+                            </div>
+                            <div
+                                style={{
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    alignItems: "center",
+                                    gap: "10px",
+                                }}
+                            >
+                                Suite:
+                                <input
+                                    readOnly={isEditing}
+                                    type="text"
+                                    className={cl.editInp}
+                                    value={user.address.suite}
+                                    onChange={(e) => {
+                                        handleChangeUser({
+                                            ...user,
+                                            address: {
+                                                city: user.address.city,
+                                                street: user.address.street,
+                                                suite: e.target.value,
+                                            },
+                                        });
+                                    }}
+                                ></input>
+                            </div>
                         </div>
                         <hr />
 
@@ -71,6 +148,7 @@ export default function CardUser({ user, dispatch }) {
                         <div className={cl.info}>
                             {user.company.name} <br /> {user.company.bs}
                         </div>
+                        <hr/>
                         <span className={cl.title}>Site:</span>
                         <div className={cl.info}>
                             <a
@@ -86,7 +164,8 @@ export default function CardUser({ user, dispatch }) {
                 <Button onClick={back} className={cl.btn} variant="outlined">
                     Back
                 </Button>
-                <ButtonSandBox handleEdit={handleEdit} />
+                <ButtonSandBox isEdit={isEditing} handleEdit={handleEdit} />
+                <button>restore</button>
             </div>
         </Container>
     );

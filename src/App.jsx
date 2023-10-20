@@ -78,6 +78,8 @@ function reducer(state, action) {
             } else {
                 return { ...state, card: state.card };
             }
+        case "RESTORE_CARD":
+            
         // state.card.map((c) => {
         //     if (c.id === action.card.id) {
         //         return action.user;

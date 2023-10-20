@@ -5,7 +5,7 @@
 }
 
 .cardBorder {
-    width: 40%;
+    width: 45%;
     padding: 10px;
     border: 2px antiquewhite solid;
     border-radius: 20px;
@@ -79,4 +79,37 @@ button.btn:hover {
 
 .email:hover,.phone:hover, .site:hover {
     color: #dbbb63;
+}
+
+
+.editInp {
+    position: relative;
+    width: 100%;
+    color: #ffffff;
+    font-size: 20px;
+    margin: 10px 0;
+
+    transition: .3s;
+}
+
+.editInp:focus {
+    color: #b36767;
+}
+
+
+
+
+
+
+
+
+
+
+
+.addressField {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #fff;
+    gap: 10px;
 }
