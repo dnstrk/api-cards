@@ -79,7 +79,10 @@ function reducer(state, action) {
                 return { ...state, card: state.card };
             }
         case "RESTORE_CARD":
-            
+            return {
+                ...state,
+                card: action.payload,
+            };
         // state.card.map((c) => {
         //     if (c.id === action.card.id) {
         //         return action.user;
@@ -143,7 +146,11 @@ function App() {
                 ) : null}
                 {state.cardVisible ? (
                     <>
-                        <CardUser user={state.card} dispatch={dispatch} />
+                        <CardUser
+                            user={state.card}
+                            users={state.users}
+                            dispatch={dispatch}
+                        />
                     </>
                 ) : null}
             </div>

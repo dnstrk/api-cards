@@ -3,10 +3,10 @@ import cl from "./index.module.css";
 import { Container } from "@mui/material";
 import { Button } from "@mui/material";
 import ButtonSandBox from "../ButtonSandBox";
+import ButtonRestore from "../ButtonRestore";
 
-export default function CardUser({ user, dispatch }) {
+export default function CardUser({ user, users, dispatch }) {
     const [isEditing, setIsEditing] = useState(true);
-    console.log(user.id);
     function handleEdit() {
         setIsEditing(!isEditing);
     }
@@ -19,7 +19,16 @@ export default function CardUser({ user, dispatch }) {
         dispatch({ type: "CHANGED", card: user });
     }
 
-    // const [test, setTest] = useState('123')
+    function restoreCard() {
+        dispatch({
+            type: "RESTORE_CARD",
+            payload: users.map((u) => {
+                if (u.id === user.id) {
+                    return u;
+                }
+            })[user.id-1]
+        });
+    }
 
     return (
         <Container maxWidth="lg">
@@ -148,7 +157,7 @@ export default function CardUser({ user, dispatch }) {
                         <div className={cl.info}>
                             {user.company.name} <br /> {user.company.bs}
                         </div>
-                        <hr/>
+                        <hr />
                         <span className={cl.title}>Site:</span>
                         <div className={cl.info}>
                             <a
@@ -165,7 +174,7 @@ export default function CardUser({ user, dispatch }) {
                     Back
                 </Button>
                 <ButtonSandBox isEdit={isEditing} handleEdit={handleEdit} />
-                <button>restore</button>
+                <ButtonRestore restore={restoreCard} />
             </div>
         </Container>
     );

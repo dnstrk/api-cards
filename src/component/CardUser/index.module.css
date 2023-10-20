@@ -113,3 +113,15 @@ button.btn:hover {
     color: #fff;
     gap: 10px;
 }
+
+
+
+
+
+.restore {
+    color: red;
+    margin-top: 20px;
+    padding: 10px;
+    margin-bottom: 20px;
+    align-self: flex-end;
+}
