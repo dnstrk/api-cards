@@ -26,7 +26,7 @@ export default function CardUser({ user, users, dispatch }) {
                 if (u.id === user.id) {
                     return u;
                 }
-            })[user.id-1]
+            })[user.id - 1],
         });
     }
 
@@ -72,9 +72,8 @@ export default function CardUser({ user, users, dispatch }) {
                                         handleChangeUser({
                                             ...user,
                                             address: {
+                                                ...user.address,
                                                 city: e.target.value,
-                                                street: user.address.street,
-                                                suite: user.address.suite,
                                             },
                                         });
                                     }}
@@ -98,9 +97,8 @@ export default function CardUser({ user, users, dispatch }) {
                                         handleChangeUser({
                                             ...user,
                                             address: {
-                                                city: user.address.city,
+                                                ...user.address,
                                                 street: e.target.value,
-                                                suite: user.address.suite,
                                             },
                                         });
                                     }}
@@ -124,8 +122,7 @@ export default function CardUser({ user, users, dispatch }) {
                                         handleChangeUser({
                                             ...user,
                                             address: {
-                                                city: user.address.city,
-                                                street: user.address.street,
+                                                ...user.address,
                                                 suite: e.target.value,
                                             },
                                         });
